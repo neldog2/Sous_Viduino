@@ -547,6 +547,8 @@ void Run()
       if (millis() - lastLogTime > logInterval)  
       {
         lastLogTime = millis();
+        Serial.print(Setpoint);
+        Serial.print(",");
         Serial.print(Input);
         Serial.print(",");
         Serial.println(Output);
@@ -562,7 +564,7 @@ void Run()
 void DoControl()
 {
   // Read the input:
-  if (sensors.isConversionAvailable(0))
+  if (sensors.isConversionComplete())
   {
     Input = sensors.getTempC(tempSensor);
     sensors.requestTemperatures(); // prime the pump for the next one - but don't wait
